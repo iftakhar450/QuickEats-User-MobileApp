@@ -1,0 +1,90 @@
+<ActionBar title="Myorders" class="action-bar">
+</ActionBar>
+
+<side-drawer-page>
+    <StackLayout verticalAlignment="center" id="orderlist">
+        <GridLayout columns="*,*,*,*" class="ordergrid" rows="*" verticalAlignment="top" >
+            <Label textwrap="true" col="0" row="0" text="Restaurant" horizontalAlignment="center"
+                   verticalAlignment="center"></Label>
+            <Label textwrap="true" col="1" row="0" text="Rider Name" horizontalAlignment="center"
+                   verticalAlignment="center"></Label>
+            <Label textwrap="true" col="2" row="0" text="Payment" horizontalAlignment="center"
+                   verticalAlignment="center"></Label>
+            <Label textwrap="true" col="3" row="0" text="Status" horizontalAlignment="center"
+                   verticalAlignment="center"></Label>
+        </GridLayout>
+        <ListView [items]="user_orders"  (itemTap)="PendingOrderDetail($event)" separatorColor="transparent">
+            <ng-template let-item="item" let-i="index">
+                <GridLayout columns="*,*,*,*" rows="60">
+                    <Label textwrap="true" row="0" col="0" [text]="item.restaurant_name"
+                           horizontalAlignment="center" verticalAlignment="center"></Label>
+
+                    <Label row="0" col="1" [text]="item.rider_name" horizontalAlignment="center"
+                           verticalAlignment="center"></Label>
+
+                    <Label row="0" col="2" [text]="item.order_payment+'£'" horizontalAlignment="center"
+                           verticalAlignment="center"></Label>
+                    <Label row="0" col="3" [text]="item.order_status" horizontalAlignment="center"
+                           verticalAlignment="center"></Label>
+                </GridLayout>
+               </ng-template>
+        </ListView>
+    </StackLayout>
+
+<!--[shadow]="5" [elevation]="5" -->
+    <StackLayout *ngIf="[orderslength]==0" style="height:100%;width:95%" verticalAlignment="top" horizontalAlignment="center">
+        <image style="width:100;height:150;margin-top:50" verticalAlignment="top"  horizontalAlignment="center" src="res://emptyorder"></image>
+
+        <Label class="emptyorder"  verticalAlignment="center" horizontalAlignment="center" textwrap="true"  text="No order Placed yet!"></Label>
+        <Label class="emptyorderlabel" style="margin-top: 10;width: 100%"  verticalAlignment="center" horizontalAlignment="center" textwrap="true"  text="You don't have any order yet.Please search "></Label>
+        <Label class="emptyorderlabel"  style="width: 100%"  verticalAlignment="center" horizontalAlignment="center" textwrap="true"  text=" a Restaurant for your order."></Label>
+        <Button col="1" style="margin-top:50;background-color: #e27900;color: white;margin-top:50"  verticalAlignment="bottom" horizontalAlignment="center" (tap)="search_restaurant_in_your_area()"  text="SEARCH RESTAURANT IN YOUR AREA"  ></Button>
+    </StackLayout>
+
+    <AbsoluteLayout verticalAlignment="center"  horizontalAlignment="center" id="completedorderdetail" class="completedorderdetail"  visibility="collapsed" >
+        <GridLayout rows="30,*,100,60" style="width: 100%;height: 100%" >
+
+            <GridLayout row="0" columns="*,*,*,*" style="width:100%;text-align:center">
+                <Label class="header" col="0" textwrap="true" text="Item Name"></Label>
+                <Label class="header" col="1" textwrap="true" text="Item Price"></Label>
+                <Label class="header" col="2" textwrap="true" text="Quantity"></Label>
+                <Label class="header" col="3" textwrap="true" text="Unit Price"></Label>
+            </GridLayout>
+
+            <ListView row="1" [items]="order_details" style="width:100%;text-align:center;margin-top: 30">
+                <ng-template let-item="item" let-i="index" let-third="third">
+                    <GridLayout columns="*,*,*,*">
+                        <Label col="0" [text]="item.item_name"></Label>
+                        <Label col="1" [text]="item.item_price+'£'"></Label>
+                        <Label col="2" [text]="item.item_quantity"></Label>
+                        <Label col="3" [text]="item.item_quantity*item.item_price+'£'"></Label>
+
+
+                    </GridLayout>
+                </ng-template>
+            </ListView>
+
+            <GridLayout row="2"  rows="*,*,*,1,*" columns="*,*"   >
+
+                <Label col="0" row="0" class="orderrecipt" text="Amount:" horizontalAlignment="left"></Label>
+                <Label col="1" row="0" class="orderrecipt" [text]="'£'+grossamount" horizontalAlignment="right"></Label>
+
+                <Label col="0" row="1" class="orderrecipt" text="Rider Tip:" horizontalAlignment="left"></Label>
+                <Label col="1" row="1" class="orderrecipt"  [text]="'£'+ridertip" horizontalAlignment="right"></Label>
+
+                <Label col="0"  row="2" class="orderrecipt" text="Delivery fee:" horizontalAlignment="left"></Label>
+                <Label col="1" row="2" class="orderrecipt" [text]="'£'+2" horizontalAlignment="right"></Label>
+
+                <Label row="3" col="0" colSpan="2" style="background-color: black"></Label>
+
+                <Label col="0"  row="4" class="orderrecipt" text="Grand Total:" horizontalAlignment="left"></Label>
+                <Label col="1" row="4"  class="orderrecipt" [text]="'£'+(totalamount+2)" horizontalAlignment="right"></Label>
+
+            </GridLayout>
+            <GridLayout row="3"  columns="*,*"  >
+                <Button col="0" style="width:150;margin-bottom:10;background-color: #e27900;color: white" horizontalAlignment="right" text="OK"  (tap)="OkorderDetail()"></Button>
+                <Button col="1" style="width:150;margin-bottom:10;background-color: #e27900;color: white" horizontalAlignment="left" id="trackriderbtn" text="Track Rider" (tap)="trackyourRider()"  ></Button>
+            </GridLayout>
+        </GridLayout>
+    </AbsoluteLayout>
+</side-drawer-page>

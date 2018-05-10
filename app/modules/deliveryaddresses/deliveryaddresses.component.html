@@ -1,0 +1,27 @@
+<ActionBar title="Confirm address" class="action-bar">
+    <!-- <NavigationButton text="Go Back" [nsRouterLink]="['/map']" android.systemIcon="ic_menu_back"
+                       (tap)="onNavBtnTap()"></NavigationButton>-->
+</ActionBar>
+
+<side-drawer-page>
+    <GridLayout >
+        <StackLayout>
+            <ListView [items]="user_loc">
+                <ng-template let-item="item" let-i="index">
+
+                    <GridLayout columns="30,*" rows="*,*">
+                        <image class="image" row="0" col="0" rowSpan="2" src="res://deliveraddress"></image>
+                        <Label class="address" textwrap="true" row="0" col="1" [text]="item.address"></Label>
+                        <Label class="pcode" row="1" col="1" [text]="item.postalcode"></Label>
+                    </GridLayout>
+
+
+                </ng-template>
+            </ListView>
+        </StackLayout>
+
+        <AbsoluteLayout style="margin:20" horizontalAlignment="right" verticalAlignment="bottom"  >
+            <Label class="addnewdeliveryloc" horizontalAlignment="center" verticalAlignment="center" [nsRouterLink]="['/map']" text="+"></Label>
+        </AbsoluteLayout>
+    </GridLayout>
+</side-drawer-page>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "160037449420",
+    "firebase_url": "https://quickeatuser.firebaseio.com",
+    "project_id": "quickeatuser",
+    "storage_bucket": "quickeatuser.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160037449420:android:d35d5bf09960120d",
+        "android_client_info": {
+          "package_name": "org.nativescript.myprojectname"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "160037449420-vsfsmrp2spu6guad22vmcf7m256bqktm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUIZXTBK4B5TaTrt0JyarqaVRAL7Yt7cE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

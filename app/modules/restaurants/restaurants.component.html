@@ -1,0 +1,146 @@
+<ActionBar title="Quick Eats" class="action-bar">
+          <GridLayout style="margin-top:10"  rows="*" columns="120,*">
+            <!--<Image (tap)="openDrawer()" id="drawerpic" class="actionbarimages" row="0" col="0" src="res://horizontal"
+                   horizontalAlignment="left"></Image>-->
+            <label row="0" col="0" class="label_forgot_password" text="QuickEats"></label>
+            <Image row="0" col="1" id="simage" horizontalAlignment="right"  class="actionbarimages" (tap)="onSearchRestaurants()" src="res://search"></Image>
+
+        </GridLayout>
+      <!--  <SearchBar hint="Search hint" [text]="searchPhrase" (textChange)="onTextChanged($event)" (submit)="onSubmit($event)"
+                   color="white" textFieldBackgroundColor="red" textFieldHintColor="white"></SearchBar>-->
+
+
+</ActionBar>
+
+<ActivityIndicator
+        width="50"
+        height="50"
+        [busy]="isBusy"
+        class="activity-indicator"  style="color:#e27900">
+
+</ActivityIndicator>
+
+<side-drawer-page >
+    <GridLayout style="background-color: #e27900;height: 50" rows="50" columns="*,120,40,120,*">
+        <label row="0" col="1" class="gridlabel" text="Deliver ASAP" id="deliverytime"
+               (tap)="selectdelivertime()"></label>
+        <label row="0" col="2" class="tolabel" text="to"></label>
+        <label row="0" col="3" class="gridlabel" [text]="Current_location" id="getyourlocation"
+               (tap)="selectdeliverlocation()"></label>
+
+        <StackLayout style="width:100%;background-color: white;height: 100% ;border-width: 1;border-color: gray;border-top-color: #e27900"  row="0"  col="0"  colSpan="5"  visibility="collapsed" id="searchbar" >
+            <SearchBar (textChange)="onSearchTextChanged($event)" (clear)="onClear($event)"  hint="Enter Postcode" [text]="searchPhrase" (submit)="onSubmit($event)"
+                       color="gray" textFieldBackgroundColor="white" textFieldHintColor="#C7C7CD"></SearchBar>
+        </StackLayout>
+    </GridLayout>
+<GridLayout>
+
+        <StackLayout>
+
+
+            <ListView [items]="allrestaurants" (itemTap)="onItemTap($event)" separatorColor="transparent">
+
+
+                <ng-template let-item="item" let-i="index">
+
+                    <GridLayout columns="*,*" rows="*,*,*,*" class="ordergrid">
+                        <image class="list_item" row="0" col="0" colSpan="2" [src]="item.url"></image>
+
+
+                        <Label class="r_name" row="1" col="0" [text]="item.name"></Label>
+
+
+                        <AbsoluteLayout horizontalAlignment="right" verticalAlignment="top" rowSpan="2" row="0"
+                                        col="1" style="margin-top:20">
+                            <Label class="d_time" textwrap="true" [text]="item.delivery_time+'   Mins'"></Label>
+                        </AbsoluteLayout>
+                        <Label class="items" row="2" col="0" colSpan="2" [text]="item.menutype"></Label>
+                        <Label class="rating" row="3" col="0" colSpan="2" [text]="item.postal_code"></Label>
+                    </GridLayout>
+
+
+                </ng-template>
+            </ListView>
+        </StackLayout>
+    <StackLayout *ngIf="[allrestaurantslength]==0" style="height:100%;width:95%;background-color: #f8faf9" verticalAlignment="center" horizontalAlignment="center">
+        <image  style="height: 100;width: 100"  verticalAlignment="center" horizontalAlignment="center" src="res://cutlery"></image>
+        <Label class="emptyrest"  verticalAlignment="center" horizontalAlignment="center" textwrap="true"  text="Not Reachable area!"></Label>
+         <Label style="width: 100%;text-align: center" verticalAlignment="center"  horizontalAlignment="center" textwrap="true"  text="we are not yet active in your current area,we will be soon in touch.Please search with the location of working area for now."></Label>
+
+    </StackLayout>
+
+        <StackLayout id="timepicker" class="delivertimelayout" verticalAlignment="center" visibility="collapsed">
+
+
+            <TabView tabBackgroundColor="white">
+                <StackLayout *tabItem="{title: 'Today'}">
+                    <GridLayout rows="*,1,60" columns="*" class="girdfortimepicker">
+
+                        <TimePicker row="0" col="0" class="example-container" #timePicker
+                                    (loaded)="configure(timePicker)"></TimePicker>
+
+                        <label row="1" col="0" class="line"></label>
+
+                        <button row="2" col="0" class="butnsetdelivery" text="Set delivery time"
+                                (tap)="ontapsetdeliverytime(dates)"></button>
+
+                    </GridLayout>
+                </StackLayout>
+                <StackLayout *tabItem="{title: 'Tomarrow'}">
+                    <GridLayout rows="*,1,60" columns="*" class="girdfortimepicker">
+
+                        <TimePicker row="0" col="0" class="example-container" #timePicker2
+                                    (loaded)="configure(timePicker2)"></TimePicker>
+
+                        <label row="1" col="0" class="line"></label>
+
+                        <button class="butnsetdelivery" row="2" col="0" text="Set delivery time"
+                                (tap)="onTapTomorrowSet()"></button>
+
+                    </GridLayout>
+                </StackLayout>
+
+            </TabView>
+
+
+        </StackLayout>
+
+        <StackLayout id="locationpicker" class="currentlocationlayout" (tap)="onempty()" verticalAlignment="bottom"
+                     visibility="collapsed">
+            <GridLayout rows="50,*,1,50" columns="*">
+                <label row="0" col="0" verticalAlignment="top"
+                       style="background-color: white;font-size: 14;text-align: center;margin: 10"
+                       text="Set  location to deliver your order"></label>
+                <StackLayout row="1" col="0">
+
+                    <ListView [items]="user_loc" >
+
+
+                        <ng-template let-item="item" let-i="index">
+
+                            <GridLayout columns="30,*" rows="*,*">
+                                <image class="locimage" row="0" col="0" rowSpan="2" src="res://deliveraddress"></image>
+                                <Label class="address" textwrap="true" row="0" col="1" [text]="item.address"></Label>
+                                <Label class="pcode" row="1" col="1" [text]="item.postalcode"></Label>
+                            </GridLayout>
+
+
+                        </ng-template>
+                    </ListView>
+
+                </StackLayout>
+
+                <label row="2" col="0" class="line"></label>
+                <label row="3" col="0" verticalAlignment="bottom"
+                       style="background-color: white;color:#e27900;font-size: 20;text-align: center;margin: 10"
+                       text="+  Add new location" [nsRouterLink]="['/map']"></label>
+
+            </GridLayout>
+
+
+        </StackLayout>
+</GridLayout>
+
+
+</side-drawer-page>
+

@@ -1,0 +1,43 @@
+<ActionBar title="Mydetails" class="action-bar">
+    <GridLayout style="margin-top:10" row="0" rows="*" columns="*,60">
+
+        <label row="0" col="0" class="label_forgot_password" text="Mydetails"></label>
+        <Image row="0" col="1" class="actionbarimages" src="res://editprofile" (tap)="editprofile()"></Image>
+
+    </GridLayout>
+
+</ActionBar>
+
+<side-drawer-page>
+        <StackLayout class="stlayout">
+            <GridLayout columns="50,*" rows="20,20,20,20">
+
+                <Image class="image" row="0" col="0" src="res://home" rowSpan="2" verticalAlignment="center"></Image>
+                <Label class="textlable" row="0" col="1" text="First name"></Label>
+                <Label class="textlable" row="1" col="1" [text]='name'></Label>
+
+
+                <Label class="textlable" row="2" col="1" class="line"></Label>
+
+                <Image class="image" row="3" col="0" src="res://telephone" verticalAlignment="center"></Image>
+                <Label class="textlable" row="4" col="1" [text]='phoneno'></Label>
+
+            </GridLayout>
+            <Label style="margin:20" [text]="username" textwrap="true"></Label>
+
+
+        </StackLayout>
+
+
+        <StackLayout id="editprofile" class="editprofilelayout" visibility="collapsed" >
+
+            <TextField hint="Name" [(ngModel)]='name' keyboardType="email" autocorrect="false"
+                       autocapitalizationType="none" required></TextField>
+            <TextField hint="Phonenumber" [(ngModel)]='phoneno' keyboardType="number" autocorrect="false"
+                       autocapitalizationType="none" required></TextField>
+
+            <Label style="margin:20" [text]="username" textwrap="true"></Label>
+            <Button text="Save" (tap)="onSaveEditProfile()" type="submit" verticalAlignment="bottom"></Button>
+        </StackLayout>
+
+</side-drawer-page>

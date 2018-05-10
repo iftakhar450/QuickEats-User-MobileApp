@@ -1,0 +1,22 @@
+<ActionBar title="Card Details" class="action-bar">
+    <!--<NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>-->
+</ActionBar>
+
+<side-drawer-page>
+        <StackLayout style="margin: 10px">
+
+            <GridLayout columns="*,100,50" rows="60,60">
+                <TextField row="0" col="0" colSpan="2" id="cardnum" [(ngModel)]='card_num' hint="Card number"
+                           secure="true"></TextField>
+                <Image row="0" col="2" style="margin-top: 10" src="res://looking" horizontalAlignment="center"
+                       (tap)="togglepassowrd()"></Image>
+                <TextField class="expiryfield" keyboardType="number" [(ngModel)]='card_exp' row="1" col="0"
+                           hint="Expiry"></TextField>
+                <TextField class="cvvfield" keyboardType="number" [(ngModel)]='card_cvv' row="1" col="1" colSpan="2"
+                           hint="CVV"></TextField>
+            </GridLayout>
+
+            <Button horizontalAlignment="center" text="Save Card" (tap)="buyProduct()" type="submit"
+                    id="btn_savecard"></Button>
+        </StackLayout>
+</side-drawer-page>

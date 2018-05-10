@@ -1,0 +1,23 @@
+// Add your native dependencies here:
+
+// Uncomment to add recyclerview-v7 dependency
+//dependencies {
+//	compile 'com.android.support:recyclerview-v7:+'
+//}
+
+dependencies {
+    // PayPal
+    compile 'com.paypal.sdk:paypal-android-sdk:2.14.2'
+}
+android {  
+  defaultConfig {  
+    generatedDensities = []
+    applicationId = "org.nativescript.myprojectname"  
+  }  
+  aaptOptions {  
+    additionalParameters "--no-version-vectors"  
+  }
+  project.ext {
+    googlePlayServicesVersion = "11.8.0"
+  }
+} 

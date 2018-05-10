@@ -1,0 +1,22 @@
+<ActionBar title="Rider Tracking ">
+    <GridLayout columns="*,*">
+        <Label col="0" text="Rider Tracking " horizontalAlignment="left" style="font-weight: bold"
+               verticalAlignment="center"></Label>
+
+        <Image col="1" horizontalAlignment="right" verticalAlignment="center"
+               src="res://phonecall" style="height: 30;width: 30;margin-right: 10;" horizontalAlignment="right"
+               (tap)="onridercalltap()"></Image>
+    </GridLayout>
+</ActionBar>
+
+
+<side-drawer-page>
+    <GridLayout>
+
+        <GridLayout>
+            <MapView (mapReady)="onMapReady($event)"
+             ></MapView>
+
+        </GridLayout>
+    </GridLayout>
+</side-drawer-page>

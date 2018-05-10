@@ -1,0 +1,37 @@
+ActionBar {
+    background-color: #e27900;
+        color:white;
+}
+
+.custinfoLabel{
+    margin-left: 10;
+    font-size: 15;
+    font-weight: bold;
+    color:black;
+}
+.checkLabel{
+    margin-right: 10;
+    font-weight: bold;
+    color: blue;
+}
+.paymentInfoLabel{
+    margin-left: 10;
+    font-size: 15;
+    font-weight: bold;
+    color:black;
+}
+.PlaceLabel , .ContactLabel{
+   font-size: 15;
+}
+.paymentLabel{
+    font-size: 15;
+    color: blue;
+}
+
+.placeIcon, .contactIcon, .paymentIcon{
+    height: 30;
+    width: 30;
+}
+#btn_confirm{
+    background-color: #e27900;
+}

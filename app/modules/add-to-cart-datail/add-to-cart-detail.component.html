@@ -1,0 +1,92 @@
+<ActionBar title="Cart Details" class="action-bar">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+</ActionBar>
+<side-drawer-page>
+    <GridLayout>
+        <StackLayout *ngIf="[cartItemsLength]>0">
+
+            <GridLayout columns="*,*,*,*,*" class="gridForBill" rows="*" verticalAlignment="top">
+                <Label class="itemnamehead" textwrap="true" row="0" col="0" text="Item"
+                       verticalAlignment="center"></Label>
+                <Label class="itemnamehead" textwrap="true" row="0" col="1" text="Price"
+                       verticalAlignment="center"></Label>
+                <Label class="itemnamehead" textwrap="true" row="0" col="2" text="Quantity"
+                       verticalAlignment="center"></Label>
+                <Label class="itemnamehead" textwrap="true" row="0" col="3" text="Sum"
+                       verticalAlignment="center"></Label>
+                <Label class="itemnamehead" textwrap="true" row="0" col="4" text="Action"
+                       verticalAlignment="center"></Label>
+                <Label row="0" col="4"></Label>
+            </GridLayout>
+            <ListView [items]="cartItems">
+
+                <ng-template let-item="item" let-i="index">
+                    <!-- sstyle of below line  style="margin:5;margin-right:10;margin-left:10" [shadow]="5" [elevation]="5"-->
+                    <GridLayout columns="*,*,*,*,*" rows="70">
+
+                        <Label class="item" textwrap="true" row="0" col="0" [text]="item.name"
+                               verticalAlignment="center"></Label>
+                        <Label class="item" textwrap="true" row="0" col="1" [text]="'£'+item.price"
+                               verticalAlignment="center"></Label>
+                        <Label class="item" textwrap="true" row="0" col="2" [text]="item.quantity"
+                               verticalAlignment="center"></Label>
+                        <Label class="item" textwrap="true" row="0" col="3" [text]="'£'+[item.quantity]*[item.price]"
+                               verticalAlignment="center"></Label>
+                        <Image row="0" col="4" class="del_cart_image" src="res://delete" (tap)="delItem(item.id,i)"
+                               verticalAlignment="center"></Image>
+
+                    </GridLayout>
+                </ng-template>
+
+
+            </ListView>
+
+
+        </StackLayout>
+        <StackLayout *ngIf="[cartItemsLength]<1" style="height:100%;width:100%" verticalAlignment="top" horizontalAlignment="center">
+
+            <GridLayout columns="*" rows="*,*,*" style="height:100%;width:100%">
+            <Image row="0"  col="0" src="res://emptycart" style="width:100;height:150"   verticalAlignment="top" horizontalAlignment="center"></Image>
+            <Label row="1"  col="0" class="emptyCart" textwrap="true" text="Cart is Empty"></Label>
+                <Button row="2" col="0" style="margin-top:50;background-color: #e27900;color: white;margin-top:50"  verticalAlignment="center" horizontalAlignment="center" (tap)="search_restaurant_from_empty_cart()"   text="SEARCH RESTAURANT IN YOUR AREA"  ></Button>
+
+            </GridLayout>
+        </StackLayout>
+
+
+
+        <AbsoluteLayout verticalAlignment="bottom" *ngIf="[cartItemsLength]>0"
+                        style="background-color:snow;border-width: 1px;border-color:#e27900 ">
+            <GridLayout style="width:100%" columns="*,*,30,30,30" rows="*,*,*,1,*,*">
+                <Label verticalAlignment="center" style="margin-left:10" row="0" col="0" class="tiplabel"
+                       textwrap="true" text="Rider Tip"></Label>
+                <!--<TextField  horizontalAlignment="right"  hint="+" verticalAlignment="bottom" id="ridertip" [(ngModel)]='rider_tip' row="0" col="1" class="tip" keyboardType="number"></TextField>-->
+                <Label row="0" col="2" class="plusminuslable" textwrap="true" text="+" verticalAlignment="center"
+                       horizontalAlignment="center" (tap)="onRiderTipPlus()"></Label>
+                <Label row="0" col="3" style="text-align: center;color: black" textwrap="true" [text]="'£'+rider_tip"
+                       verticalAlignment="center" horizontalAlignment="center"></Label>
+                <Label row="0" col="4" class="plusminuslable" textwrap="true" text="-" verticalAlignment="center"
+                       horizontalAlignment="center" (tap)="onRiderTipMinus()"></Label>
+
+                <Label style="margin-left:10" row="1" col="0" class="totalLabel" textwrap="true"
+                       text="Delivery fee"></Label>
+                <Label horizontalAlignment="right" row="1" col="2" colSpan="3" class="total" textwrap="true"
+                       [text]="'£'+delivery_fee"></Label>
+
+                <Label style="margin-left:10" row="2" col="0" class="totalLabel" textwrap="true"
+                       text="Order Total"></Label>
+                <Label horizontalAlignment="right" row="2" col="2" colSpan="3" class="total" textwrap="true"
+                       [text]="'£'+totalPrice"></Label>
+                <Label row="3" col="0" colSpan="5" style="background-color: black"></Label>
+
+                <Label style="margin-left:10" row="4" col="0" class="totalLabel" textwrap="true"
+                       text="Grand Total"></Label>
+                <Label horizontalAlignment="right" row="4" col="2" colSpan="3" class="total" textwrap="true"
+                       [text]="'£'+grand_total"></Label>
+                <Button row="5" col="0" colSpan="5" text="CheckOut" (tap)="onchkout()" type="submit"
+                        id="btn_chkout"></Button>
+            </GridLayout>
+        </AbsoluteLayout>
+
+    </GridLayout>
+</side-drawer-page>

@@ -1,0 +1,55 @@
+<ActionBar title="Select Your Locations">
+    <Image   horizontalAlignment="right"  class="actionbarimages" (tap)="onSearchbartap()" src="res://search"></Image>
+</ActionBar>
+<side-drawer-page>
+    <GridLayout rows="40,1,*" columns="*"  style="width: 100%;height:100%"  visibility="collapsed" id="searchbar">
+
+    <StackLayout row="0" col="0" style="background-color:white"  verticalAlignment="top" horizontalAlignment="center"    >
+           <SearchBar  style="width: 100%;height: 50;background-color:lavender" (textChange)="onSearchTextChanged($event)" (clear)="onClear($event)"  hint="Search location" [text]="searchPhrase" (submit)="onSubmit($event)"
+                      color="gray" textFieldBackgroundColor="white" textFieldHintColor="#C7C7CD"></SearchBar>
+    </StackLayout>
+        <label row="1" col="0" style="background-color: #C7C7CD"></label>
+
+    <StackLayout  row="2" col="0"   verticalAlignment="top" horizontalAlignment="center"   style="background-color: transparent" >
+
+        <ListView [items]="locations" (itemTap)="onlocationTap($event)" separatorColor="transparent" class="location_list">
+            <ng-template let-item="item" let-i="index">
+
+                <GridLayout columns="50,*" rows="*,1" >
+
+                    <Image row="0" col="0" style="height: 15;width: 15"  horizontalAlignment="center"  verticalAlignment="center"   src="res://searchone"></Image>
+
+                    <Label col="1" row="0" style="padding:10" textwrap="true" [text]="item.loc_description"></Label>
+                    <Label col="0" row="1" colspan="2" style="background-color:#C7C7CD ;margin-left:15;margin-right:15" ></Label>
+
+                </GridLayout>
+
+
+            </ng-template>
+        </ListView>
+    </StackLayout>
+    </GridLayout>
+
+    <GridLayout>
+
+       <!-- <button class="button" src="res://home">
+
+
+        </button>-->
+        <!--<Image src="res://place"  style="height:30;width:30"></Image>-->
+
+        <!--<Image   class="image"(tap)="getlocation()" src="res://home"></Image>-->
+        <GridLayout>
+            <MapView (mapReady)="onMapReady($event)" (coordinateTapped)="onCoordinateTapped($event)"
+                     (cameraChanged)="onCameraChanged($event)" [latitude]="latitude" [longitude]="longitude" [zoom]="12"
+                    ></MapView>
+        </GridLayout>
+        <AbsoluteLayout horizontalAlignment="center" verticalAlignment="center">
+            <Image src="res://userplace"  style="height:30;width:30"></Image>
+        </AbsoluteLayout>
+        <AbsoluteLayout horizontalAlignment="center" verticalAlignment="bottom">
+            <button text="Confirm Your Location" class="confirm_user_loc" (tap)="onuserSelectedl_location()"></button>
+
+        </AbsoluteLayout>
+    </GridLayout>
+</side-drawer-page>

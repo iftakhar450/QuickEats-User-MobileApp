@@ -1,0 +1,51 @@
+<RadSideDrawer  [transition]="drawerTransition">
+  <StackLayout  tkDrawerContent class="sidedrawer-left">
+    <StackLayout class="sidedrawer-header" >
+      <!-- Set src attribute to the logo of the app -->
+      <Label style="margin-top: 48;font-family:Calibri ;font-weight: bold " id="lb1" class="sidedrawer-header-brand"
+             [text]="name">
+      </Label>
+
+      <Label style="font-family:Calibri" id="lb2"
+             class="sidedrawer-header-brand"
+             [text]="email">
+      </Label>
+
+
+    </StackLayout>
+    <ScrollView>
+      <StackLayout class="sidedrawer-content">
+        <GridLayout
+            class="sidedrawer-list-item"
+            *ngFor="let nav of navMenu" columns="50,*">
+          <Image  col="0" style="height: 20;width:20;" [src]="nav.imageURL"></Image>
+          <Button col="1"
+              class="sidedrawer-list-item-text borderless-btn"
+              [text]="nav.name"
+              (tap)="navigateTo(nav.commands)">
+          </Button>
+        </GridLayout>
+      </StackLayout>
+    </ScrollView>
+  </StackLayout>
+
+
+
+
+  <StackLayout tkMainContent>
+    <StackLayout [visibility]="isContentVisible ? 'visible' : 'collapsed'">
+      <ng-content ></ng-content>
+    </StackLayout>
+    <GridLayout
+        class="loader-container"
+        [visibility]="!isContentVisible ? 'visible' : 'collapsed'">
+      <ActivityIndicator
+          width="50"
+          height="50"
+          [busy]="!isContentVisible"
+          class="activity-indicator"  style="color:#e27900">
+
+      </ActivityIndicator>
+    </GridLayout>
+  </StackLayout>
+</RadSideDrawer>

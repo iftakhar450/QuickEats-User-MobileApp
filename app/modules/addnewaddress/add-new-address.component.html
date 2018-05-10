@@ -1,0 +1,33 @@
+<ActionBar title="Confirm address" class="action-bar">
+   <!-- <NavigationButton text="Go Back" [nsRouterLink]="['/map']" android.systemIcon="ic_menu_back"
+                      (tap)="onNavBtnTap()"></NavigationButton>-->
+</ActionBar>
+
+<side-drawer-page>
+    <GridLayout >
+        <ScrollView>
+
+            <StackLayout>
+
+                <TextField hint="Nickname" autocorrect="false" autocapitalizationType="none"
+                           [(ngModel)]='nickname'></TextField>
+                <TextField hint="Flat number/building number(optional)" autocorrect="false"
+                           autocapitalizationType="none" [(ngModel)]='flatnumber'></TextField>
+                <TextField hint="Address line" keyboardType="email" autocorrect="false" autocapitalizationType="none"
+                           [(ngModel)]='address_lin1'></TextField>
+                <TextField hint="Postcode" keyboardType="number" autocorrect="false" autocapitalizationType="none"
+                           [(ngModel)]='post_code'></TextField>
+                <TextField hint="Phone number" keyboardType="number" autocorrect="false" autocapitalizationType="none"
+                           [(ngModel)]='phone_number'></TextField>
+                <label textwrap="true"
+                       text="Your contect number is required for contact you in case of any issue in delivering your order."></label>
+                <TextField hint="Instruction for your rider?(optional)" autocorrect="false"
+                           autocapitalizationType="none" [(ngModel)]='instruction_to_rider'></TextField>
+
+
+                <Button text="Submit" type="submit" id="btn_submit" (tap)="submitLocation()"></Button>
+
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
+</side-drawer-page>

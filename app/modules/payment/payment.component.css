@@ -1,0 +1,23 @@
+
+ActionBar {
+    background-color: #e27900;
+    color:white;
+
+}
+TextView {
+    text-align:center;
+}
+
+image {
+    height: 30;
+    width: 30;
+}
+#btn_savecard{
+    background-color: #e27900;
+    width:60%;
+    margin-top: 20;
+    color:white;
+}
+#cardnum{
+    margin-top:-20;
+}

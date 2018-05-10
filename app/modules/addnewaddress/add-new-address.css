@@ -1,0 +1,25 @@
+
+ActionBar {
+    background-color: #e27900;
+    color: white;
+}
+
+button {
+    width: 150;
+    height: 10%;
+    text-align: center;
+   color: white;
+    background-color: #e27900;
+
+
+}
+
+TextField {
+    margin: 10;
+    placeholder-color: #D3D3D3;
+}
+label {
+    margin: 10;
+}
+
+

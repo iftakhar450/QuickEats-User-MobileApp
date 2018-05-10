@@ -1,0 +1,47 @@
+
+ActionBar {
+    background-color: #e27900;
+    color:white;
+}
+
+button {
+    width: 200;
+    height: 50;
+    text-align: center;
+    font-weight: bold;
+    background-color: #e27900;
+    margin-top: 20;
+
+    
+   
+}
+Button{
+    color: white;
+
+}
+
+TextField {
+    margin: 10;
+    placeholder-color: #D3D3D3;
+}
+label {
+    margin: 10;
+}
+.signup_password {
+    width: 100%;
+   
+    
+}
+
+
+.signup_gird {
+    margin: 10;
+}
+
+image {
+
+height:30;
+width:30;
+
+}
+

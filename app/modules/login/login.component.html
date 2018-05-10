@@ -1,0 +1,36 @@
+<ActionBar title="Login">
+</ActionBar>
+<side-drawer-page>
+    <GridLayout id="logindiv">
+    <StackLayout>
+        <TextField hint="Email address" [(ngModel)]='login_email' keyboardType="email" autocorrect="false"
+                   autocapitalizationType="none" required></TextField>
+
+        <GridLayout class="signin_gird" columns="*, *, *,60" rows="60">
+            <TextField id="password" [(ngModel)]='login_possword' row="0" col="0" colSpan="3" hint="Password"
+                       class="signin_password" secure="true"></TextField>
+            <Image row="0" col="3" src="res://looking" horizontalAlignment="center" (tap)="togglepassowrd()"></Image>
+        </GridLayout>
+
+
+
+        <Button text="Log in" (tap)="onLoginTap()" type="submit" id="btn_login" horizontalAlignment="center" ></Button>
+
+        <label class="label_forgot_password" text="Forgot password" (tap)="forgotpassword()"></label>
+
+        <label text="New user? Create an account" style="color:#e27900;font-size: 18;margin-top:5%" (tap)="onSignpTap()" horizontalAlignment="center" ></label>
+    </StackLayout>
+
+    </GridLayout>
+
+</side-drawer-page>
+<StackLayout class="forgot" id="forgotpasswordlabel" horizontalAlignment="center" verticalAlignment="center" visibility="collapsed"  >
+    <TextField hint="Email address" [(ngModel)]='reset_email' keyboardType="email" autocorrect="false"
+               autocapitalizationType="none" required></TextField>
+
+    <GridLayout  columns="*" rows="80,80">
+        <Button text="Reset" col="0" row="0" type="submit" id="btn_login" (tap)="onresetbtn()" horizontalAlignment="center" verticalAlignment="bottom" ></Button>
+        <Button text="Back to Login" col="0" row="1" type="submit" id="btn_login"(tap)="onresetlogin()" horizontalAlignment="center" verticalAlignment="bottom"></Button>
+    </GridLayout>
+
+</StackLayout>

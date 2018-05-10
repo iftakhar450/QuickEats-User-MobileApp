@@ -1,0 +1,65 @@
+<ActionBar title="Order Detail" class="action-bar">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+</ActionBar>
+
+<ActivityIndicator
+        width="50"
+        height="50"
+        [busy]="isBusy"
+        class="activity-indicator"  style="color:#e27900">
+
+</ActivityIndicator>
+<side-drawer-page>
+    <GridLayout >
+<GridLayout style="height:100%" columns="*" rows="250,*" >
+    <GridLayout style="margin: 10;margin-bottom: 20;margin-top: 20" [shadow]="5" [elevation]="5" columns="*" rows="50,*" row="0" col="0" horizontalAlignment="center">
+        <Label horizontalAlignment="left"  verticalAlignment="center" class="custinfoLabel" textwrap="true" row="0" col="0" colSpan="2" text="Customer Information"></Label>
+        <Label (tap)="changeDelievery()" horizontalAlignment="right"  verticalAlignment="center" class="checkLabel" style="color: #e27900"textwrap="true" row="0" col="0" colSpan="2" text="Change"></Label>
+
+        <GridLayout [shadow]="5" [elevation]="5"  row="1" col="0" colSpan="2" columns="80,*" rows="70,70">
+            <Image verticalAlignment="center" class="placeIcon" row="0" col="0" src="res://deliveraddress"></Image>
+            <Label (tap)="selectdeliverlocation()" verticalAlignment="center" class="PlaceLabel" textwrap="true" row="0" col="1" [text]="deliveryPlace"></Label>
+            <Image verticalAlignment="center" class="contactIcon" row="1" col="0" src="res://telephone"></Image>
+            <TextView  [editable]="editState" verticalAlignment="center" class="ContactLabel" textwrap="true" row="1" col="1" [text]="contact_no" [(ngModel)]="contact_no"></TextView>
+        </GridLayout>
+    </GridLayout>
+
+
+
+    <Button horizontalAlignment="center" verticalAlignment="center" style="margin-bottom: 10;color:white;height:60;width: 60%;" row="1" col="0" text="Confirm Order" type="submit"
+             id="btn_confirm" (tap)="buyProduct()" visibility="visible"></Button>
+
+<!--    [nsRouterLink]="['/payment']"-->
+    <StackLayout style="background-color: white" row="1" col="0" id="locationpicker" class="currentlocationlayout" verticalAlignment="bottom" visibility="collapse">
+        <GridLayout rows="50,*,1,50" columns="*">
+            <label row="0" col="0" verticalAlignment="top" style="background-color: white;font-size: 14;text-align: center;margin: 10" text="Set location to deliver your order"></label>
+            <StackLayout row="1" col="0">
+
+                <ListView [items]="user_loc"  class="loc_list" (itemTap)="onItemTap($event)">
+
+
+                    <ng-template let-item="item" let-i="index">
+
+                        <GridLayout columns="30,*" rows="*,*">
+                            <image class="locimage" row="0" col="0" rowSpan="2" src="res://deliveraddress"></image>
+                            <Label class="address" textwrap="true" row="0" col="1"  [text]="item.address"></Label>
+                            <Label class="pcode" row="1" col="1"  [text]="item.postalcode"></Label>
+                        </GridLayout>
+
+
+
+                    </ng-template>
+                </ListView>
+
+            </StackLayout>
+
+            <label row="2" col="0" class="line"></label>
+            <label row="3" col="0" verticalAlignment="bottom" style="background-color: white;color:#e27900;font-size: 20;text-align: center;margin: 10" text="+  Add new location"  [nsRouterLink]="['/map']" ></label>
+
+        </GridLayout>
+
+    </StackLayout>
+</GridLayout>
+    </GridLayout>
+</side-drawer-page>
+
