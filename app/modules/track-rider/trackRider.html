@@ -14,9 +14,12 @@
     <GridLayout>
 
         <GridLayout>
-            <MapView (mapReady)="onMapReady($event)"
-             ></MapView>
+            <MapView #mapView [latitude]="maplat" [longitude]="maplan"
+                     [zoom]="zoom" [bearing]="bearing"
+                     [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" (mapReady)="onMapReady($event)"></MapView>
 
+            <!--[latitude]="maplat" [longitude]="maplan" [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"-->
+            <!--[tilt]="tilt"-->
         </GridLayout>
     </GridLayout>
 </side-drawer-page>

@@ -82,7 +82,7 @@ ActionBar {
 }
 .tiplabel {
     font-size: 15;
-    font-weight: bold;
+
     color: black;
 
     margin-left: 10;
@@ -91,7 +91,7 @@ ActionBar {
 }
 .totalLabel{
     font-size: 15;
-    font-weight: bold;
+
     color: black;
 }
 .emptyCart{

@@ -39,11 +39,14 @@
     <GridLayout
         class="loader-container"
         [visibility]="!isContentVisible ? 'visible' : 'collapsed'">
+      <image style="height:70;width:70" src="res://loaderimage"></image>
       <ActivityIndicator
-          width="50"
-          height="50"
+          width="100"
+          height="100"
           [busy]="!isContentVisible"
-          class="activity-indicator"  style="color:#e27900">
+          class="activity-indicator"
+          color="#C7C7CD"
+          >
 
       </ActivityIndicator>
     </GridLayout>

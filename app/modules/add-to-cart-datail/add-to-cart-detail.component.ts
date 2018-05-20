@@ -18,6 +18,7 @@ import * as dialogs from "ui/dialogs";
 import { isAndroid, isIOS, device, screen } from "platform";
 import * as application from "application";
 import { AndroidApplication, AndroidActivityBackPressedEventData } from "application";
+import {AbsoluteLayout} from "tns-core-modules/ui/layouts/absolute-layout";
 
 var dialog = require("nativescript-dialog");
 class DeviceInfo {
@@ -39,7 +40,11 @@ export class addtocartdetailComponent implements OnInit {
     public totalPrice:number =0;
     public rider_tip:number=0;
     public delivery_fee:number=2;
-    public grand_total:number;
+    public grand_total:any;
+    public delete_item_id:any;
+    public delete_item_index:any;
+
+
 
     // This pattern makes use of Angular�s dependency injection implementation to inject an instance of the ItemService service into this class. 
     // Angular knows about this service because it is included in your app�s main NgModule, defined in app.module.ts.
@@ -150,22 +155,12 @@ export class addtocartdetailComponent implements OnInit {
 
         if(token==""){
             let that=this;
-            dialog.show({
-                    title: "Attention",
-                    message: "You  have to login first!",
-                    cancelButtonText: "Cancel",
-                    okButtonText:"login"
+            let layout: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("customalert");
 
-                }
-            ).then(function(r){
+            layout.visibility="visible";
+            let layout1: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("deleteItemalert");
+            layout1.visibility="collapse";
 
-                console.log("Result: " + r);
-                if(r==true){
-
-                    that.router.navigate(["/login"]);
-                }
-
-            });
 
         }
         else{
@@ -188,41 +183,49 @@ export class addtocartdetailComponent implements OnInit {
     }
 
     delItem(id,index){
+                this.delete_item_id=id;
+                this.delete_item_index=index;
+        let layout: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("deleteItemalert");
+        layout.visibility="visible";
+        let layout1: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("customalert");
 
-        let that=this;
-        dialog.show({
-                title: "Attention",
-                message: "Sure To Delete ?",
-                cancelButtonText: "Cancel",
-                okButtonText:"Yes"
+        layout1.visibility="collapse";
 
-            }).then(function(r){
+        /*
+                let that=this;
+                dialog.show({
+                        title: "Attention",
+                        message: "Sure To Delete ?",
+                        cancelButtonText: "Cancel",
+                        okButtonText:"Yes"
 
-
-            console.log("Result: " + r);
-            if(r==true){
-
-                that.CartService
-                    .del_cart_item(id)
-                    .subscribe((result) => {
-                        console.log("Dialog: " + index);
-                        let string_response = JSON.stringify(result);
-                        let helper = JSON.parse(string_response);
-                        that.totalPrice-=that.cartItems[index].quantity*that.cartItems[index].price;
-                        that.grand_total-=that.cartItems[index].quantity*that.cartItems[index].price;
-                        that.cartItems.splice(index, 1);
-                        console.log(JSON.stringify(that.cartItems));
+                    }).then(function(r){
 
 
-                    }, (error) => {
-                        //this.onGetDataError(error);
-                        console.log(JSON.stringify(error));
-                        //alert( console.log(JSON.stringify(error._body.message)));
-                    });
+                    console.log("Result: " + r);
+                    if(r==true){
 
-            }
+                        that.CartService
+                            .del_cart_item(id)
+                            .subscribe((result) => {
+                                console.log("Dialog: " + index);
+                                let string_response = JSON.stringify(result);
+                                let helper = JSON.parse(string_response);
+                                that.totalPrice-=that.cartItems[index].quantity*that.cartItems[index].price;
+                                that.grand_total-=that.cartItems[index].quantity*that.cartItems[index].price;
+                                that.cartItems.splice(index, 1);
+                                console.log(JSON.stringify(that.cartItems));
 
-        });
+
+                            }, (error) => {
+                                //this.onGetDataError(error);
+                                console.log(JSON.stringify(error));
+                                //alert( console.log(JSON.stringify(error._body.message)));
+                            });
+
+                    }
+
+                });*/
 
     }
 
@@ -248,5 +251,49 @@ export class addtocartdetailComponent implements OnInit {
         this.router.navigate(['/restaurants']);
 
     }
+    onAlertCancel(){
+        let layout: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("customalert");
+        layout.visibility="collapse";
+
+    }
+    OnAlertOK(){
+
+        let layout: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("customalert");
+        layout.visibility="collapse";
+        this.router.navigate(["/login"]);
+    }
+    onDeleteAlertCancel(){
+        let layout: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("deleteItemalert");
+        layout.visibility="collapse";
+
+    }
+    OnDeleteAlertOK(){
+
+        let layout: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("deleteItemalert");
+        layout.visibility="collapse";
+
+        this.CartService
+            .del_cart_item(this.delete_item_id)
+            .subscribe((result) => {
+                console.log("Dialog: " + this.delete_item_index);
+                let string_response = JSON.stringify(result);
+                let helper = JSON.parse(string_response);
+                this.totalPrice-=this.cartItems[this.delete_item_index].quantity*this.cartItems[this.delete_item_index].price;
+                this.grand_total-=this.cartItems[this.delete_item_index].quantity*this.cartItems[this.delete_item_index].price;
+                this.cartItems.splice(this.delete_item_index, 1);
+                console.log(JSON.stringify(this.cartItems));
+
+
+            }, (error) => {
+                //this.onGetDataError(error);
+                console.log(JSON.stringify(error));
+                //alert( console.log(JSON.stringify(error._body.message)));
+            });
+
+
+
+    }
+
+
 }
 

@@ -23,6 +23,13 @@ export class loginService {
             .map(res => res);
     }
 
+
+    testservice() {
+        // console.log("data"+JSON.stringify(data));
+        let options = this.createRequestOptions();
+        return this.http.post("https://api.atom.purevpn.com/auth/v1/accessToken?secretKey=b12e0405d803ba771c46bb94be29a0a59f976b06&grantType=secret", { headers: options })
+            .map(res => res);
+    }
     user_login_api_call(data: any) {
        // console.log("data"+JSON.stringify(data));
         let options = this.createRequestOptions();

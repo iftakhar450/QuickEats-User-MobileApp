@@ -98,7 +98,7 @@ export class signupComponent implements OnInit {
         //alert(this.v_code+"--------"+code);
         if(this.v_code.toUpperCase()==code){
 
-           /// alert(this.v_code.toUpperCase()+"--------"+JSON.stringify(code));
+
             this.signup();
         }else{
 
@@ -114,18 +114,19 @@ export class signupComponent implements OnInit {
         {
             console.log(check);
             this.mysignupservice
-                .user_signup_api_call({ user_name: this.signup_name,  user_password: this.signup_password,user_username:this.signup_email,user_mobile_no:this.signup_phone , user_postal_code:this.postal_code})
+                .user_signup_api_call({ user_name: this.signup_name,  user_password: this.signup_password,user_username:this.signup_email,user_mobile_no:this.signup_phone , user_postal_code:this.postal_code,user_email_status:"verified"})
                 .subscribe(res => {
 
                         console.log("res"+JSON.stringify(res));
-                        alert("Successful");
+
                         this.router.navigate(["/login"]);
 
 
                     },
                     (error) => {
                         let helper=JSON.parse(JSON.stringify(error));
-                        alert(helper._body.err.invalidAttributes.user_username[0].message);
+                      //  alert(helper._body.err.invalidAttributes.user_username[0].message);
+                        alert(JSON.stringify(error));
 
 
 

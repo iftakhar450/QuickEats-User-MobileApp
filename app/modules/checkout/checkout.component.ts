@@ -65,10 +65,10 @@ export class CheckoutComponent implements OnInit {
 
         this.papypalAmount=parseInt(this.totalPrice) + parseInt(this.rider_tip)+2;
         //paypal
-        this.PayPal.init({
-            clientId: 'AXcqFBZQAyQ9-DBGF0Pz8Ixs9bzXEFRqzeqgoQ5fxBlIA3T9xIbnPPm9Di_qw1ea5cd6tDJiatifnFUe',
-            environment: 0
-        });
+      /*  this.PayPal.init({
+            // clientId: 'AXcqFBZQAyQ9-DBGF0Pz8Ixs9bzXEFRqzeqgoQ5fxBlIA3T9xIbnPPm9Di_qw1ea5cd6tDJiatifnFUe',
+            environment: 2
+        });*/
     }
 
     //paypal

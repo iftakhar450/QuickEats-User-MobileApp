@@ -7,7 +7,7 @@
 
 dependencies {
     // PayPal
-    compile 'com.paypal.sdk:paypal-android-sdk:2.14.2'
+    compile 'com.paypal.sdk:paypal-android-sdk:2.6.9'
 }
 android {  
   defaultConfig {  

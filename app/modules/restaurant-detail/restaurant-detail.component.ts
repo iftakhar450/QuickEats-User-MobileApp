@@ -15,6 +15,8 @@ import {addToCartService} from "../add-to-cart-datail/add-to-cart.service";
 import * as application from "application";
 import { AndroidApplication, AndroidActivityBackPressedEventData } from "application";
 import {menudetail} from "./menu";
+import { GestureTypes, PanGestureEventData } from "ui/gestures";
+
 
 class DeviceInfo {
     constructor(
@@ -52,7 +54,7 @@ export class restaurantdetailComponent implements OnInit {
     public userAgent: string;
     public origin: string;
     public url: string;
-    public listheight: any=20*20;
+    public menulistheight: any=0;
 
 
     public cartItems = new Array<itemdetail>();
@@ -154,6 +156,7 @@ export class restaurantdetailComponent implements OnInit {
 
 
                     }
+                    this.menulistheight=this.menulistheight+(menuitems.length*80)
                     this.menus[i]=new menudetail(m_id,m_name,menuitems,menuitems.length);
                     // this.menus.push(m_id,m_name,menuitems);
 
@@ -162,7 +165,9 @@ export class restaurantdetailComponent implements OnInit {
 
 
                 console.log("----------------------------final1111-----------------------------------");
-                console.log(JSON.stringify(this.menus));
+                this.menulistheight=this.menulistheight+(this.menus.length*50)
+               console.log(this.menulistheight);
+               // this.menulistheight=this.menus.length*50;
                 console.log("-------------------------------final-11111-------------------------------");
                 //console.log(this.parAgStrSeperate.length);
 
@@ -288,6 +293,8 @@ export class restaurantdetailComponent implements OnInit {
             }
         });
     }
+
+
 
 
 }

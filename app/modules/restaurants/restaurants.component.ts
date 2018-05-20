@@ -43,7 +43,7 @@ export class restaurantsComponent implements AfterViewInit, OnInit {
     restaurants: Array<Restaurant> = new Array<Restaurant>();
     data: string;
     public user_loc: locations[] = [];
-
+public isContentVisible:any;
     private _mainContentText: string = "bsfnb hdv  hfhmnsb ihdvj";
     public Current_location: string = "Loding..";
     public user: string;
@@ -290,27 +290,72 @@ export class restaurantsComponent implements AfterViewInit, OnInit {
 
     selectdeliverlocation() {
 
-        console.log("tapped");
+
         let token=getString("access_token");
 
-        if(token!="" ){
 
-            let layout: StackLayout = <StackLayout>this.page.getViewById("locationpicker");
-            let llayout: StackLayout = <StackLayout>this.page.getViewById("timepicker");
+        if(token ){
 
 
-            if (layout.visibility == "collapse") {
+            if(token!="") {
 
-                layout.visibility = "visible";
-                llayout.visibility="collapse";
 
-            } else {
+                let layout: StackLayout = <StackLayout>this.page.getViewById("locationpicker");
+                let llayout: StackLayout = <StackLayout>this.page.getViewById("timepicker");
 
-                layout.visibility = "collapse";
+
+                if (layout.visibility == "collapse") {
+
+                    layout.visibility = "visible";
+                    llayout.visibility = "collapse";
+
+                } else {
+
+                    layout.visibility = "collapse";
+                }
+            }
+            else{
+
+
+
+
+                let layout: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("customalert");
+
+                layout.visibility="visible";
+
+                /* let that=this;
+             dialog.show({
+                     title: "Attention",
+                     message: "Please login first to add location!",
+                     cancelButtonText: "Cancel",
+                     okButtonText:"Login"
+
+                 }
+             ).then(function(r){
+
+                 console.log("Result: " + r);
+                 if(r==true){
+                    // phone.dial(abc,false);
+                     that.router.navigate(["/login"]);
+
+
+                 }
+
+             });*/
+
             }
 
-        }else{
-                let that=this;
+        }
+        else{
+
+
+
+
+            let layout: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("customalert");
+
+            layout.visibility="visible";
+
+               /* let that=this;
             dialog.show({
                     title: "Attention",
                     message: "Please login first to add location!",
@@ -328,7 +373,7 @@ export class restaurantsComponent implements AfterViewInit, OnInit {
 
                 }
 
-            });
+            });*/
 
         }
 
@@ -405,14 +450,17 @@ export class restaurantsComponent implements AfterViewInit, OnInit {
 
         let postalCode=searchBar.text;
         this.isBusy = true;
-        this.allrestaurants=null;
 
+        this.allrestaurants=null;
+        this.allrestaurantslength=1;
         this.restaurantService.searchRestaurantsfromapi(postalCode)
             .subscribe((result) => {
                 let helper = JSON.stringify(result);
                 let data = JSON.parse(helper);
                 console.log("data"+JSON.stringify(data.status));
                 this.allrestaurantslength=1;
+                this.isBusy=false;
+
                 this.showrestaurants(data);
 
             }, (error) => {
@@ -461,6 +509,18 @@ export class restaurantsComponent implements AfterViewInit, OnInit {
         sbar.visibility="collapse";
         let simage:Image=<Image>this.page.getViewById("simage");
         simage.visibility="visible";
+    }
+
+    onAlertCancel(){
+        let layout: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("customalert");
+        layout.visibility="collapse";
+
+    }
+    OnAlertOK(){
+
+        let layout: AbsoluteLayout = <AbsoluteLayout>this.page.getViewById("customalert");
+        layout.visibility="collapse";
+        this.router.navigate(["/login"]);
     }
 }
 

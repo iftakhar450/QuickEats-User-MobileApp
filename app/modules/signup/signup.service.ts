@@ -19,7 +19,7 @@ export class SignupService {
 
 
     user_signup_api_call(data: any) {
-        console.log(JSON.stringify(data));
+
         let options = this.createRequestOptions();
         return this.http.post(this.serverUrl+"/user/register", { data }, { headers: options })
             .map(res => res);

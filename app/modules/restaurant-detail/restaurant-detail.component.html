@@ -11,27 +11,29 @@
                            class="activity-indicator"></ActivityIndicator>
 
 
-        <StackLayout>
 
-                        <GridLayout   verticalAlignment="top">
-                            <image [src]="restaurant_image"></image>
+<ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton>
+<StackLayout>
+    <GridLayout   verticalAlignment="top">
+        <image [src]="restaurant_image" style="border-bottom-width:3;border-color: #e27900;mso-border-shadow:10"></image>
+    </GridLayout>
 
-                        </GridLayout>
             <!-------------------------------------------------------------------->
-            <ListView [items]="menus" separatorColor="transparent" tkExampleTitle tkToggleNavButton>
+            <ListView style="margin-bottom: 70;;background-color: white" [height]="menulistheight"  [items]="menus" separatorColor="transparent" tkExampleTitle tkToggleNavButton>
+
 
                 <ng-template tkListItemTemplate let-item="item" let-i="index">
 
                     <GridLayout columns="*" rows="*,*">
                         <StackLayout row="0" col="0"  >
-                            <GridLayout  columns="*" rows="*,1" >
-                            <Label row="0" col="0" class="menu" textwrap="true" [text]="item.menu_name"></Label>
-                            <Label row="1" col="0" style="background-color:#C7C7CD "></Label>
-                            </GridLayout>
+
+                            <Label  class="menu" textwrap="true" [text]="item.menu_name"></Label>
+
+
                         </StackLayout>
 
 
-                            <ListView  row="1" col="0" style="background-color: #DCDCDC" [height]="item.length*80" [items]="item.menu_items" (itemTap)="ondetailItemTap($event,i)"
+                            <ListView  row="1" col="0" style="background-color: #f1f1f1" [height]="item.length*80" [items]="item.menu_items" (itemTap)="ondetailItemTap($event,i)"
                                       separatorColor="transparent" tkExampleTitle tkToggleNavButton>
 
                                 <ng-template tkListItemTemplate let-item="item" let-i="index">
@@ -60,9 +62,8 @@
                 </ng-template>
             </ListView>
             <!-------------------------------------------------------------------->
-
-
-        </StackLayout>
+</StackLayout>
+</ScrollView>
 
 
         <AbsoluteLayout (tap)="noWhere()" horizontalAlignment="right" verticalAlignment="bottom">

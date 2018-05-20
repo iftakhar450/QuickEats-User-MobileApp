@@ -12,15 +12,36 @@
 
 </ActionBar>
 
-<ActivityIndicator
-        width="50"
-        height="50"
-        [busy]="isBusy"
-        class="activity-indicator"  style="color:#e27900">
+<!--<ActivityIndicator
 
-</ActivityIndicator>
+        [busy]="isBusy"
+        class="activity-indicator" >
+
+</ActivityIndicator>-->
+
+
+<StackLayout tkMainContent>
+    <StackLayout [visibility]="isContentVisible ? 'visible' : 'collapsed'">
+        <ng-content ></ng-content>
+    </StackLayout>
+    <GridLayout
+            class="loader-container"
+            [visibility]="!isContentVisible ? 'visible' : 'collapsed'">
+        <image style="height:70;width:70" src="res://loaderimage"></image>
+        <ActivityIndicator
+                width="100"
+                height="100"
+                [busy]="!isContentVisible"
+                class="activity-indicator"
+                color="#C7C7CD"
+        >
+
+        </ActivityIndicator>
+    </GridLayout>
+</StackLayout>
 
 <side-drawer-page >
+
     <GridLayout style="background-color: #e27900;height: 50" rows="50" columns="*,120,40,120,*">
         <label row="0" col="1" class="gridlabel" text="Deliver ASAP" id="deliverytime"
                (tap)="selectdelivertime()"></label>
@@ -33,7 +54,7 @@
                        color="gray" textFieldBackgroundColor="white" textFieldHintColor="#C7C7CD"></SearchBar>
         </StackLayout>
     </GridLayout>
-<GridLayout>
+    <GridLayout id="alertbackground">
 
         <StackLayout>
 
@@ -139,7 +160,20 @@
 
 
         </StackLayout>
+        <AbsoluteLayout id="customalert" style="width:80%;height:200;background-color:#DCDCDC;border-width: 2;border-color: #e27900;border-radius:15"  verticalAlignment="center"  horizontalAlignment="center" visibility="collapsed">
+            <GridLayout  rows="35,*,50" columns="*,*" style="width:100%;height:100%">
+                <label row="0" col="0" colSpan="2" text="Attention" style="background-color: #e27900;color:white;font-size: 22;text-align: center;border-top-left-radius: 13;border-top-right-radius: 15"></label>
+                <label row="1" col="0" colSpan="2" style="font-size: 15;margin:10" textwrap="true" text="Please login first to add location! "></label>
+                <label  row="2" col="0" text="Cancel"  style="color:#e27900;font-size:15" (tap)="onAlertCancel()"  verticalAlignment="center"  horizontalAlignment="center" ></label>
+                <label  row="2" col="1" text="Login"  style="color:#e27900;font-size:15" (tap)="OnAlertOK()"  verticalAlignment="center"  horizontalAlignment="center" ></label>
+            </GridLayout>
+        </AbsoluteLayout>
+
 </GridLayout>
+
+
+
+
 
 
 </side-drawer-page>

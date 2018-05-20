@@ -41,8 +41,32 @@ export class loginComponent implements OnInit {
 
         }*/
 
-        
+     //   this.test();
     }
+
+
+  /*  test(){
+        console.log("enter");
+        this.myloginservice
+            .testservice()
+            .subscribe(res => {
+                   alert(JSON.stringify(res));
+
+
+                },
+                (error) => {
+
+                    let string_response = JSON.stringify(error);
+
+                    //alert("user not exsist");
+                    alert("error"+JSON.stringify(error));
+                    //alert(JSON.stringify(error._body.message));
+
+
+                });
+
+
+    }*/
     onNavBtnTap() {
         // This code will be called only in Android.
         console.log("Navigation button tapped!");
