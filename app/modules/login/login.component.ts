@@ -41,7 +41,7 @@ export class loginComponent implements OnInit {
 
         }*/
 
-     //   this.test();
+      // this.test();
     }
 
 

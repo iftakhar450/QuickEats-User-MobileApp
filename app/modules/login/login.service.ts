@@ -27,7 +27,7 @@ export class loginService {
     testservice() {
         // console.log("data"+JSON.stringify(data));
         let options = this.createRequestOptions();
-        return this.http.post("https://api.atom.purevpn.com/auth/v1/accessToken?secretKey=b12e0405d803ba771c46bb94be29a0a59f976b06&grantType=secret", { headers: options })
+        return this.http.get("https://api.atom.purevpn.com/inventory/v1/getCountries?iResellerId="+272, { headers: options })
             .map(res => res);
     }
     user_login_api_call(data: any) {
@@ -42,6 +42,7 @@ export class loginService {
       //  headers.set("AuthKey", "my-key");
        // headers.set("token", "my-token");
         headers.set("Content-Type", "application/json");
+        headers.set("X-AccessToken", "bdfb7a61e60b94d07926e32b6f46bdcd83bd21fb267c113c1399eb2e69595429");
         return headers;
     }
 

@@ -38,61 +38,33 @@ import {Directions} from "nativescript-directions";
 export class TrackRiderComponent implements OnInit {
 
 
-
-     // maplat:string;
-     maplat = 31.584416;
-     zoom = 8;
-     minZoom = 0;
-     maxZoom = 22;
-     bearing = 0;
-     tilt = 0;
-    lastCamera: String;
-    //  maplan :string;
-     maplan = 74.382781;
-
+    public latitude:any=51.517899;
+    public maplat:any=51.517899;
+    public longitude:any=-0.124439;
+    public maplan:any=-0.124439;
 
     map: MapView;
     marker: Marker;
     ridermarker: Marker;
     public rider_number: string;
     public polyPoints: any;
-    public intervalfuncation:any;
-    order_id_id :any;
+
     // This pattern makes use of Angular�s dependency injection implementation to inject an instance of the ItemService service into this class.
     // Angular knows about this service because it is included in your app�s main NgModule, defined in app.module.ts.
 
 
     constructor(private trackriderService: TrackRiderService, private route: ActivatedRoute) {
         const order_id = +this.route.snapshot.params["orderid"];
-
         this.map= new MapView();
-        console.log("map view..........................constructure...................."+this.map);
+        this.trackRider(order_id);
 
-        this.order_id_id= order_id;
-
-        console.log("order_id_id.........................constructure...................."+this.order_id_id);
-
-
-    }
-
-    onCameraChanged(args) {
-        console.log("Camera changed: " + JSON.stringify(args.camera), JSON.stringify(args.camera) === this.lastCamera);
-        this.lastCamera = JSON.stringify(args.camera);
     }
 
     ngOnInit(): void {
-        /*const order_id=+this.route.snapshot.params[orderid"];
-        this.trackRider(order_id);"
+        /*const order_id=+this.route.snapshot.params["orderid"];
+        this.trackRider(order_id);
         */
 
-
-
-    }
-
-    public ngOnDestroy() {
-
-        console.log("clear interval called");
-        clearInterval(this.intervalfuncation);
     }
 
 
@@ -101,34 +73,9 @@ export class TrackRiderComponent implements OnInit {
     onMapReady(args) {
         console.log("Map Ready");
 
-
-
         this.map = args.object;
-        console.log("Map Ready1");
-        // this.marker = new Marker();
-        // this.map = new MapView();
-        // this.marker = new mapsModule.Marker();
-        // this.ridermarker = new mapsModule.Marker();
-
-
-        // this.map.addMarker(this.marker);
-        console.log("Map Ready2");
-
-        // this.map.addMarker(this.ridermarker);
-        // this.map.setMyLocationEnabled(true);
-
-         console.log("map view..............................................");
-
-        // this.map = new MapView();
-
-        this.map.myLocationEnabled = true;
-        console.log("map view.................................................");
-
-
-
-
-        this.trackRider(this.order_id_id);
-
+        this.map.addMarker(this.marker);
+        this.map.addMarker(this.ridermarker);
 
         /*this.marker = new mapsModule.Marker();
        this.marker.position = mapsModule.Position.positionFromLatLng(48.87, 2.35);
@@ -141,15 +88,10 @@ export class TrackRiderComponent implements OnInit {
 
     trackRider(id) {
 
-        console.log("track rider...");
-        this.map = new MapView();
-        console.log("track rider...");
-
-
+        this.map= new MapView();
 
         this.trackriderService.getorderDetailForTrackingRider(id)
             .subscribe((result) => {
-
 
                 let helper = JSON.stringify(result);
                 let data = JSON.parse(helper);
@@ -163,45 +105,19 @@ export class TrackRiderComponent implements OnInit {
 
                 console.log("------------------------------" + orderlat + " " + orderlan + " " + riderlat + " " + riderlan + " " + this.rider_number);
 
-              //  this.map.removeAllMarkers();
-                console.log("map");
-
-                // this.map = new MapView();
-
-                console.log("map");
-
-                this.maplat = orderlat;
-                this.maplan= orderlan;
+                this.latitude = orderlat;
+                this.longitude = orderlan;
                 this.marker = new mapsModule.Marker();
                 this.ridermarker = new mapsModule.Marker();
                 this.marker.position = mapsModule.Position.positionFromLatLng(orderlat, orderlan);
                 this.ridermarker.position = mapsModule.Position.positionFromLatLng(riderlat, riderlan);
-                console.log("6map"+this.marker);
-                console.log("6map"+this.map);
-
-                // this.map.addMarker(this.marker);
-                console.log("7map");
-                this.map.addMarker(this.ridermarker);
-                console.log("8map");
 
 
                 let imgSrc = new ImageSource();
-                console.log("map1");
-
                 imgSrc.fromResource("deliverymen");
-                console.log("map2");
-
                 let image = new Image();
-                console.log("map3");
-
                 image.imageSource = imgSrc;
-                console.log("map4");
-
                 this.marker.icon = image;
-                console.log("map5");
-
-
-                console.log("map view.........."+this.map);
 
 
                 this.drawpolyline(riderlat, riderlan, orderlat, orderlan);
@@ -216,15 +132,12 @@ export class TrackRiderComponent implements OnInit {
 
     drawpolyline(rlatitude, rlongitude, ulatitude, ulongitude) {
 
-        console.log("map poly ");
-
-
         // alert(rlatitude+rlongitude+rlongitude+ulongitude);
         this.trackriderService.MapData(rlatitude, rlongitude, ulatitude, ulongitude)
             .subscribe((result) => {
                 this.onSuccess(result);
-               // console.log("on succes -----" + JSON.stringify(result));
-
+                console.log("on succes -----" + JSON.stringify(result));
+                alert("succes");
             }, (error) => {
                 // this.onGetDataError(error);
                 alert("error");
@@ -236,14 +149,6 @@ export class TrackRiderComponent implements OnInit {
     }
 
     onSuccess(response) {
-
-        // this.map = new MapView();
-
-        console.log("map view.........."+this.map);
-        console.log("map view..........");
-
-        console.log("map view..............................................."+this.map);
-
 
 
         let respoise = response._body;
@@ -276,7 +181,7 @@ export class TrackRiderComponent implements OnInit {
         }
 
         poly.color = new Color("#e27900");
-        poly.width = 20;
+        poly.width = 8;
         poly.geodesic = true;
 
         console.log("---------------------------------------------------Polyline 1:");
@@ -285,7 +190,6 @@ export class TrackRiderComponent implements OnInit {
 
 
         let position = new Position();
-
         console.log("current postion is ....." + position.latitude + "...,,,,...." + position.longitude);
 
 
