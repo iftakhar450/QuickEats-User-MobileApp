@@ -36,6 +36,7 @@
 		"polyline": "^0.2.0",
 		"reflect-metadata": "~0.1.8",
 		"rxjs": "~5.4.2",
+		"tns-android": "3.4.2",
 		"tns-core-modules": "^3.3.0"
 	},
 	"devDependencies": {
